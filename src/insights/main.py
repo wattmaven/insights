@@ -1,11 +1,12 @@
 from fastapi import FastAPI
 
 from insights.settings import settings
+from insights.version import __version__
 
 app = FastAPI(
     title="WattMaven Insights",
     description="A simple analytics microservice for PV systems.",
-    version="0.0.0",
+    version=__version__,
     servers=[
         server
         for server in [

@@ -1,6 +1,6 @@
-# fastapi-template
+# WattMaven Analytics
 
-A template for a FastAPI project.
+A simple analytics microservice for PV systems.
 
 ## Development
 
@@ -42,3 +42,11 @@ git push -u origin v<new-version>
 ## License
 
 This project is licensed under the **MIT License**. See the [LICENSE](./LICENSE) file for details.
+
+## Acknowledgments
+
+### Licenses
+
+See [LICENSES](./LICENSES) for details.
+
+- [PVAnalytics](https://github.com/pvlib/pvanalytics) - Primarily uses documentation examples and code snippets.

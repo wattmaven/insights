@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     """
 
     python_env: str | None = "production"
-    fastapi_template_domain: str
+    insights_domain: str
 
     model_config: SettingsConfigDict = SettingsConfigDict(env_file=".env")
 

@@ -1,10 +1,10 @@
 from fastapi import FastAPI
 
-from fastapi_template.settings import settings
+from insights.settings import settings
 
 app = FastAPI(
-    title="FastAPI Template",
-    description="A template for a FastAPI project.",
+    title="WattMaven Insights",
+    description="A simple analytics microservice for PV systems.",
     version="0.0.0",
     servers=[
         server
@@ -14,7 +14,7 @@ app = FastAPI(
             if settings.python_env != "production"
             else None,
             {
-                "url": f"https://{settings.fastapi_template_domain}",
+                "url": f"https://{settings.insights_domain}",
                 "description": "Production",
             },
         ]
@@ -23,7 +23,7 @@ app = FastAPI(
     license_info={
         "name": "MIT",
         "identifier": "MIT",
-        "url": "https://opensource.org/licenses/MIT",
+        "url": "https://opensource.org/licenses/apache-2.0",
     },
     contact={
         "name": "WattMaven",

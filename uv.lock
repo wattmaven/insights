@@ -161,7 +161,7 @@ wheels = [
 ]
 
 [[package]]
-name = "fastapi-template"
+name = "insights"
 source = { editable = "." }
 dependencies = [
     { name = "click" },

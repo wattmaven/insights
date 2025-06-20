@@ -27,7 +27,7 @@ make install-hooks
 # Run development server with auto-reload
 make dev
 # or
-fastapi-template --reload true
+insights --reload true
 
 # Run tests
 make test
@@ -66,7 +66,7 @@ git push -u origin v<new-version>
 ### Project Structure
 The codebase follows a clean, modular structure:
 
-- **`src/fastapi_template/`**: Main application module
+- **`src/insights/`**: Main application module
   - `main.py`: FastAPI application instance and route definitions
   - `settings.py`: Pydantic settings management with environment variable support
   - `cli.py`: Click-based CLI entry point that launches uvicorn server
@@ -74,7 +74,7 @@ The codebase follows a clean, modular structure:
 - **Configuration Management**: 
   - Uses Pydantic Settings with `.env` file support
   - Settings are cached using `@lru_cache` for performance
-  - Key settings: `python_env` (default: "production"), `fastapi_template_domain`
+  - Key settings: `python_env` (default: "production"), `insights_domain`
 
 - **Testing Strategy**:
   - Tests organized by type using pytest markers (unit, integration, e2e)

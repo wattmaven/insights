@@ -12,15 +12,13 @@ app.include_router(router)
 
 @pytest.mark.integration
 @pytest.mark.anyio
-async def test_simple_identity_missing_data(testdata_golden_dir):
-    with open(
-        testdata_golden_dir / "simple-identify-missing-data" / "request-body.json"
-    ) as f:
+async def test_simple_identify_missing_data(testdata_golden_dir):
+    golden_dir = testdata_golden_dir / "simple-identify-missing-data"
+
+    with open(golden_dir / "request-body.json") as f:
         request_body = json.load(f)
 
-    with open(
-        testdata_golden_dir / "simple-identify-missing-data" / "response.json"
-    ) as f:
+    with open(golden_dir / "response.json") as f:
         expected_response = json.load(f)
 
     async with AsyncClient(

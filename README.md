@@ -26,6 +26,22 @@ uv sync --all-packages
 make dev
 ```
 
+### Testing
+
+```bash
+# Run the tests
+make test
+```
+
+#### Test Data
+
+Test data is stored in the [testdata](./testdata) directory.
+
+We have a curated selection of **golden** test data that is used to verify the correctness of requests and responses.
+You can find this at the [testdata/golden](./testdata/golden) directory.
+
+If you think you have a good test case, feel free to add it!
+
 ## Release
 
 This project uses [Hatch](https://hatch.pypa.io/) for building and releasing.

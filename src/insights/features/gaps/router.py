@@ -6,9 +6,10 @@ from fastapi import APIRouter
 from pvanalytics.quality import gaps
 from pydantic import BaseModel, ConfigDict, Field
 
-from insights.common.exceptions import IncompleteInferrenceError
-from insights.common.models import DataPeriod, NormalizedValueAndTimestamp
-from insights.common.utils import can_infer_data_frequency
+from insights.common.models import (
+    NormalizedValueAndTimestamp,
+    create_normalized_value_and_timestamp_series,
+)
 
 router = APIRouter(
     prefix="/gaps",
@@ -93,8 +94,8 @@ class IdentifyMissingDataRequestBody(BaseModel):
     """
     The frequency of the data.
     """
-    data_frequency: Optional[str] = Field(
-        None,
+    data_frequency: str = Field(
+        ...,
         description="The frequency of the data. If not provided, the data frequency will be inferred from the data.",
         examples=["15min"],
     )
@@ -125,15 +126,8 @@ async def identify_missing_data(
     Detect missing data in a given period.
     """
 
-    if request_body.data_frequency is None and not can_infer_data_frequency(
-        request_body.data
-    ):
-        raise IncompleteInferrenceError
-
-    # Load the data into a pandas series
-    data = pd.Series(
-        [item.value for item in request_body.data],
-        index=[item.timestamp for item in request_body.data],
+    data = create_normalized_value_and_timestamp_series(
+        request_body.data, request_body.data_frequency
     )
 
     # Identify the missing data
@@ -146,6 +140,7 @@ async def identify_missing_data(
     completeness_score_by_day = (
         completeness_score_series.groupby(completeness_score_series.index.date)
         .mean()
+        .round(5)  # Round to 5 decimal places for consistency
         .to_dict()
     )
 
@@ -188,8 +183,8 @@ class TrimMissingDataRequestBody(BaseModel):
     """
     The frequency of the data.
     """
-    data_frequency: Optional[str] = Field(
-        None,
+    data_frequency: str = Field(
+        ...,
         description="The frequency of the data. If not provided, the data frequency will be inferred from the data.",
         examples=["15min"],
     )
@@ -259,15 +254,8 @@ async def trim_missing_data(
     Trim missing data in a given period.
     """
 
-    if request_body.data_frequency is None and not can_infer_data_frequency(
-        request_body.data
-    ):
-        raise IncompleteInferrenceError
-
-    # Load the data into a pandas series
-    data = pd.Series(
-        [item.value for item in request_body.data],
-        index=[item.timestamp for item in request_body.data],
+    data = create_normalized_value_and_timestamp_series(
+        request_body.data, request_body.data_frequency
     )
 
     # Identify the missing data

@@ -12,8 +12,16 @@ app.include_router(router)
 
 @pytest.mark.integration
 @pytest.mark.anyio
-async def test_simple_identify_missing_data(testdata_golden_dir):
-    golden_dir = testdata_golden_dir / "simple-identify-missing-data"
+@pytest.mark.parametrize(
+    "test_case",
+    [
+        "simple-identify-missing-data",
+        "complex-month-hourly-identify-missing-data",
+        # ...
+    ],
+)
+async def test_identify_missing_data(testdata_golden_dir, test_case):
+    golden_dir = testdata_golden_dir / test_case
 
     with open(golden_dir / "request-body.json") as f:
         request_body = json.load(f)

@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "stream_name": "ac_power",
+      "value": 0.1,
+      "timestamp": "2023-06-21T12:00:00Z"
+    },
+
+    {
+      "stream_name": "ac_power",
+      "value": 0.2,
+      "timestamp": "2023-06-21T12:15:00Z"
+    },
+
+    {
+      "stream_name": "ac_power",
+      "value": 0.3,
+      "timestamp": "2023-06-21T12:30:00Z"
+    }
+  ],
+  "data_frequency": "15min"
+}

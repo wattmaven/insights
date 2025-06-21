@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+from insights.features.gaps import router as gaps
 from insights.settings import settings
 from insights.version import __version__
 
@@ -37,3 +38,6 @@ app = FastAPI(
 @app.get("/")
 async def root():
     return {"status": "ok"}
+
+
+app.include_router(gaps.router)

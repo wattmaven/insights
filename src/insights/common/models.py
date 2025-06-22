@@ -61,6 +61,21 @@ def create_normalized_value_and_timestamp_series(
     return series
 
 
+class NormalizedStreamValueAndTimestamp(NormalizedValueAndTimestamp):
+    """
+    A normalized stream value and timestamp.
+    """
+
+    """
+    The name of the stream.
+    """
+    stream_name: str = Field(
+        ...,
+        description="The name of the stream.",
+        examples=["ac_power"],
+    )
+
+
 class DataPeriod(BaseModel):
     """
     A period of time.

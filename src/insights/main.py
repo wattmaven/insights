@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+from insights.features.clipping import router as clipping
 from insights.features.gaps import router as gaps
 from insights.settings import settings
 from insights.version import __version__
@@ -40,4 +41,5 @@ async def root():
     return {"status": "ok"}
 
 
+app.include_router(clipping.router)
 app.include_router(gaps.router)
